@@ -30,7 +30,7 @@ public class SlotButtonUI : MonoBehaviour
 					//No more Stock!
 					GetComponent<Image>().enabled = false;
 					_clickButton.interactable = false;
-					_clicksText.text = "";
+					_clicksText.enabled = false;
 				}
 				RefreshClicksText();
 			}
