@@ -39,6 +39,7 @@ public class SlotButtonUI : MonoBehaviour
 
 	//Only one event for all Slots
 	public static event Action<Reward> OnSlotReward;
+	public static event Action<SlotButtonUI> OnSlotClicked;
 	#endregion
 
 	#region Fields
@@ -62,6 +63,7 @@ public class SlotButtonUI : MonoBehaviour
 	private void Awake()
 	{
 		_game = FindObjectOfType<GameController>();
+		Reward.ObjectReward = this;
 	}
 
 	// Start is called before the first frame update
@@ -94,15 +96,19 @@ public class SlotButtonUI : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void Click(int clickCount)
+	public void Click(int clickCount, bool agent = false)
 	{
 		_particles.startSpeed = Mathf.Clamp(clickCount / 2, 1, 30);
 		_particles.Emit(Mathf.Clamp(clickCount,1, 15));
 		ClicksLeft -= clickCount;
 		RefreshClicksText();
-		Instantiate(_pointsPrefab, transform);
 		Camera.main.DOShakePosition(Mathf.Clamp(0.01f * clickCount, 0, 2));
-		_game.RainParticles();
+		if (!agent)
+		{
+			PointsElementUI newPoints = _game.Pool.GetPoints();
+			newPoints.Initialize(transform);
+			_game.RainParticles();
+		}
 	}
 
 	private void RefreshClicksText()
@@ -115,6 +121,7 @@ public class SlotButtonUI : MonoBehaviour
 	#region Private Methods
 	private void Click()
 	{
+		OnSlotClicked?.Invoke(this);
 		int clickRatio = Mathf.RoundToInt(_game.ClickRatio);
 		Click(clickRatio);
 	}

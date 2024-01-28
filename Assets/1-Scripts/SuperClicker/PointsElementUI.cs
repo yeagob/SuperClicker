@@ -23,10 +23,15 @@ public class PointsElementUI : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		DoEffect();
+    }
+
+	private void DoEffect()
+	{
 		_clicksText.transform.Translate(Vector3.back);
 		//Set Clicks text
 		_clicksText.text = "+" + _game.ClickRatio.ToString();
-		
+
 		//Movement
 		transform.DOMoveY(transform.position.y + UnityEngine.Random.Range(100, 500), _duration);
 
@@ -34,14 +39,18 @@ public class PointsElementUI : MonoBehaviour
 		_clicksText.DOColor(new Color(0, 0, 0, 0), _duration);
 
 		// Parámetros del movimiento sinusoidal
-		Destroy(gameObject, _duration);
-    }
+		_game.Pool.AddToPool(this, _duration);
+	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	public void Initialize(Transform transformClick)
     {
-        
-    }
+		_clicksText.color = Color.white;
+		gameObject.SetActive(true);
+		transform.parent = transformClick;
+		transform.localPosition = Vector3.zero;
+		DoEffect();
+	}
 	#endregion
 
 	#region Public Methods

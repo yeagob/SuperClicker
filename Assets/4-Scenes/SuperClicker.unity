@@ -6609,6 +6609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2006130954}
+  - component: {fileID: 2006130957}
   - component: {fileID: 2006130953}
   - component: {fileID: 2006130956}
   - component: {fileID: 2006130955}
@@ -6632,6 +6633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ClickRatio>k__BackingField: 1
+  <Pool>k__BackingField: {fileID: 2006130957}
   _agents:
   - {fileID: 4063764471889246418, guid: 45bf8ccbc51cba840b457546418c3e9b, type: 3}
   _rewardText: {fileID: 1007179591}
@@ -6725,6 +6727,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2006130957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006130952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6044a42f9b51884aa4d5fe2f75db9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointsPrefab: {fileID: 6119242216037446272, guid: ce809ce078c8feb47ba03392ad620612, type: 3}
 --- !u!1001 &2028512418
 PrefabInstance:
   m_ObjectHideFlags: 0

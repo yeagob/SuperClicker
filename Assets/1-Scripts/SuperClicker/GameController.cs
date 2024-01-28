@@ -7,9 +7,11 @@ public class GameController : MonoBehaviour
 {
 	#region Properties
 	[field:SerializeField] public float ClickRatio { get; set; }
+	[field:SerializeField] public PoolSystem Pool { get; set; }
 	#endregion
 
 	#region Fields
+	[SerializeField] private Agent[] _agents;
 	[SerializeField] private TextMeshProUGUI _rewardText;
 	[SerializeField] private TextMeshProUGUI _clicksText;
 
@@ -37,6 +39,15 @@ public class GameController : MonoBehaviour
 	#endregion
 
 	#region Private Methods
+	/***
+ *       ____    U _____ u                 _       ____     ____    _    
+ *    U |  _"\ u \| ___"|/__        __ U  /"\  uU |  _"\ u |  _"\ U|"|u  
+ *     \| |_) |/  |  _|"  \"\      /"/  \/ _ \/  \| |_) |//| | | |\| |/  
+ *      |  _ <    | |___  /\ \ /\ / /\  / ___ \   |  _ <  U| |_| |\|_|   
+ *      |_| \_\   |_____|U  \ V  V /  U/_/   \_\  |_| \_\  |____/ u(_)   
+ *      //   \\_  <<   >>.-,_\ /\ /_,-. \\    >>  //   \\_  |||_   |||_  
+ *     (__)  (__)(__) (__)\_)-'  '-(_/ (__)  (__)(__)  (__)(__)_) (__)_) 
+ */
 	private void GetReward(Reward reward)
 	{
 		ShowReward(reward);
@@ -58,7 +69,9 @@ public class GameController : MonoBehaviour
 
 		if (reward.RewardType == RewardType.Agent)
 		{
-			//...
+			Agent newAgent = Instantiate(_agents[(int)reward.Value],transform.position, Quaternion.identity);
+			newAgent.destiny = reward.ObjectReward;
+
 			return;
 		}
 	}
