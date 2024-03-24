@@ -82,15 +82,12 @@ public class SlotButtonUI : MonoBehaviour
 		RefreshClicksText();
     }
 
-	private void Initialize()
+	private void OnTriggerEnter(Collider other)
 	{
-		ClicksLeft = _initialClics;
-
-		//Particle frame
-		float segment = 1f / 28f;
-		float frame = segment * _materialParticleIndex;
-		var tex = _particles.textureSheetAnimation;
-		tex.startFrame = frame;
+		if(other.tag =="Hand")
+		{
+			Click();
+		}
 	}
 
 	#endregion
@@ -119,6 +116,18 @@ public class SlotButtonUI : MonoBehaviour
 	#endregion
 
 	#region Private Methods
+
+	private void Initialize()
+	{
+		ClicksLeft = _initialClics;
+
+		//Particle frame
+		float segment = 1f / 28f;
+		float frame = segment * _materialParticleIndex;
+		var tex = _particles.textureSheetAnimation;
+		tex.startFrame = frame;
+	}
+
 	private void Click()
 	{
 		OnSlotClicked?.Invoke(this);
